@@ -8,7 +8,7 @@ export const Board = ({Blocks, animating, handleBlockClick}) => {
         <main className="board">
             {
                 Blocks.map( (block, i) =>{
-                    return <Block key={`${i}_${block.emoji}`} animating={animating} handleBlockClick={handleBlockClick} block={block}/>
+                    return <Block key={`${i}_${block.imagen}`} animating={animating} handleBlockClick={handleBlockClick} block={block}/>
                 })
             }
         </main>

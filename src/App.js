@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Board } from './components/Board'
-const emojiList = [...'🤡🧠🦾🦷🫀🦴🫁🤬']
+//const imagenList = [...'🤡🧠🦾🦷🫀🦴🫁🤬']
+const imagenList = ["https://img.icons8.com/color/48/000000/treatment-plan.png", "https://img.icons8.com/office/40/000000/tooth.png", "https://img.icons8.com/clouds/100/000000/stethoscope.png", "https://img.icons8.com/ios/50/000000/medical-doctor.png", "https://img.icons8.com/doodle/48/000000/pills.png", "https://img.icons8.com/bubbles/50/000000/lungs.png", "https://img.icons8.com/ios-filled/50/000000/xray.png", "https://img.icons8.com/fluency/48/000000/brain.png"]
 
 export const App = () => {
   const [randomBlocks, setRandomBlocks] = useState([]);
@@ -10,8 +11,8 @@ export const App = () => {
   const [bandera, setBandera] = useState(false);
 
   useEffect(() => {
-    const randomEmojiLis = revolverArray([...emojiList, ...emojiList, ...emojiList])
-    setRandomBlocks(randomEmojiLis.map((emoji, i) => ({ index: i, emoji, flipped: false })))
+    const randomImagenList = revolverArray([...imagenList, ...imagenList, ...imagenList])
+    setRandomBlocks(randomImagenList.map((imagen, i) => ({ index: i, imagen, flipped: false })))
   }, [])
 
   const revolverArray = a => {
@@ -29,11 +30,11 @@ export const App = () => {
     setRandomBlocks(randomBlocksCopy);
     if (selectBlock === null && bandera === false) {
       setSelectBlock(block);
-    } else if (selectBlock.emoji === block.emoji && bandera === false) {
+    } else if (selectBlock.imagen === block.imagen && bandera === false) {
       setSelectBlockAdicional(block);
       setBandera(true);
     } else if (bandera) {
-      if (selectBlockAdicional.emoji === block.emoji && selectBlock.emoji === block.emoji) {
+      if (selectBlockAdicional.imagen === block.imagen && selectBlock.imagen === block.imagen) {
         setSelectBlockAdicional(null);
         setSelectBlock(null);
         setBandera(false);

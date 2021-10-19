@@ -8,7 +8,7 @@ export const Block = ({block, animating, handleBlockClick}) => {
                 <div className="memo-block-front">
                 </div>
                 <div className="memo-block-back">
-                    {block.emoji}
+                    <img className="imagen" src={block.imagen} alt="someting"/>
                 </div>
             </div>
             
