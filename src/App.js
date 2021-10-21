@@ -1,72 +1,82 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext, forwardRef } from 'react'
 import { Board } from './components/Board'
-//const imagenList = [...'🤡🧠🦾🦷🫀🦴🫁🤬']
-const imagenList = ["https://img.icons8.com/color/48/000000/treatment-plan.png", "https://img.icons8.com/office/40/000000/tooth.png", "https://img.icons8.com/clouds/100/000000/stethoscope.png", "https://img.icons8.com/ios/50/000000/medical-doctor.png", "https://img.icons8.com/doodle/48/000000/pills.png", "https://img.icons8.com/bubbles/50/000000/lungs.png", "https://img.icons8.com/ios-filled/50/000000/xray.png", "https://img.icons8.com/fluency/48/000000/brain.png"]
+import { MemoramaContext } from './context/MemoramaContext'
+import Countdown from 'react-countdown';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export const App = () => {
-  const [randomBlocks, setRandomBlocks] = useState([]);
-  const [selectBlock, setSelectBlock] = useState(null);
-  const [animating, setAnimating] = useState(false);
-  const [selectBlockAdicional, setSelectBlockAdicional] = useState(null);
-  const [bandera, setBandera] = useState(false);
-
+  const [modal, setModal] = useState(false);
+  const [contador, setContador] = useState(1);
+  const [mensaje, setMensaje] = useState();
+  const { obtenerTablero, timerKey, timer, date, setTimerKey, setDate, setImagenList } = useContext(MemoramaContext)
   useEffect(() => {
-    const randomImagenList = revolverArray([...imagenList, ...imagenList, ...imagenList])
-    setRandomBlocks(randomImagenList.map((imagen, i) => ({ index: i, imagen, flipped: false })))
+    obtenerTablero();
+    // eslint-disable-next-line
   }, [])
 
-  const revolverArray = a => {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
+
+  const reiniciar = () => {
+    setContador(prev => prev + 1)
+    setDate(Date.now() + 15000)
+    setTimerKey(timerKey + 1);
+    obtenerTablero();
   }
 
-  const handleBlockClick = block => {
-    const flippedBlock = { ...block, flipped: true }
-    let randomBlocksCopy = [...randomBlocks];
-    randomBlocksCopy.splice(block.index, 1, flippedBlock);
-    setRandomBlocks(randomBlocksCopy);
-    if (selectBlock === null && bandera === false) {
-      setSelectBlock(block);
-    } else if (selectBlock.imagen === block.imagen && bandera === false) {
-      setSelectBlockAdicional(block);
-      setBandera(true);
-    } else if (bandera) {
-      if (selectBlockAdicional.imagen === block.imagen && selectBlock.imagen === block.imagen) {
-        setSelectBlockAdicional(null);
-        setSelectBlock(null);
-        setBandera(false);
-      } else {
-        setAnimating(true);
-        setTimeout(() => {
-          randomBlocksCopy.splice(block.index, 1, block);
-          randomBlocksCopy.splice(selectBlock.index, 1, selectBlock);
-          randomBlocksCopy.splice(selectBlockAdicional.index, 1, selectBlockAdicional);
-          setRandomBlocks(randomBlocksCopy);
-          setSelectBlock(null);
-          setSelectBlockAdicional(null);
-          setBandera(false);
-          setAnimating(false)
-        }, 500);
-      }
+  const handleSiguiente = () => {
+    if (contador < 3) {
+      reiniciar();
+      setModal(false);
+    } else {
+      setModal(false)
     }
-    else {
-      setAnimating(true);
-      setTimeout(() => {
-        randomBlocksCopy.splice(block.index, 1, block);
-        randomBlocksCopy.splice(selectBlock.index, 1, selectBlock);
-        setRandomBlocks(randomBlocksCopy);
-        setSelectBlock(null);
-        setSelectBlockAdicional(null);
-        setBandera(false);
-        setAnimating(false)
-      }, 500);
-    }
-  }
+  };
 
   return (
-    <Board Blocks={randomBlocks} animating={animating} handleBlockClick={handleBlockClick} />
+    <>
+      <Countdown date={date}
+        intervalDelay={0}
+        precision={3}
+        key={timerKey}
+        renderer={timer}
+        onComplete={() => {
+          if (contador === 1) {
+            setMensaje("No te rindas!! casi lo tenias.")
+            setImagenList(["https://img.icons8.com/office/40/000000/hospital-wheel-bed.png", "https://img.icons8.com/office/40/000000/dialysis-machine.png", "https://img.icons8.com/office/40/000000/doctors-bag.png", "https://img.icons8.com/office/40/000000/medical-heart.png", "https://img.icons8.com/office/40/000000/fever.png", "https://img.icons8.com/color/48/000000/hospital-3.png", "https://img.icons8.com/color/48/000000/surgery.png", "https://img.icons8.com/color/96/000000/syringe.png"])
+          } else if (contador === 2) {
+            setMensaje("ultimo intento ¿listo?")
+            setImagenList(["https://img.icons8.com/office/40/000000/rod-of-asclepius.png", "https://img.icons8.com/office/40/000000/caduceus.png", "https://img.icons8.com/office/40/000000/hearing-aid.png", "https://img.icons8.com/office/40/000000/ambulance.png", "https://img.icons8.com/office/40/000000/protection-mask.png", "https://img.icons8.com/office/40/000000/nurse-male.png", "https://img.icons8.com/office/40/000000/virus.png", "https://img.icons8.com/office/40/000000/diabetes.png"])
+          }
+          setModal(true);
+        }}
+      />
+      <span>{`${contador}/3`}</span>
+      <Dialog
+        open={modal}
+        TransitionComponent={Transition}
+        keepMounted
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Perdiste :'C"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {contador === 3 ? 'No lo pudiste terminar :C te dejo intentarlo en modo libre de momento...' : mensaje}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleSiguiente}>{contador === 3 ? 'Modo libre' : 'Siguiente'}</Button>
+        </DialogActions>
+      </Dialog>
+      <Board />
+    </>
   )
 }

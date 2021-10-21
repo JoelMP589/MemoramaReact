@@ -5,3 +5,11 @@
     max-width: 600px;
     margin: 100px auto;
 }
+
+@media (max-width: 600px) {
+    .board{
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 450px;
+        grid-gap: 3px;
+    }   
+}

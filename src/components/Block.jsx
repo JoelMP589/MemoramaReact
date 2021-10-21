@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { MemoramaContext } from '../context/MemoramaContext'
 import '../css/Block.css'
 
-export const Block = ({block, animating, handleBlockClick}) => {
+export const Block = ({block}) => {
+    const {animating, handleBlockClick } = useContext(MemoramaContext)
     return (
         <div className="memo-block" onClick={()=>(!block.flipped && !animating) && handleBlockClick(block)}>
             <div className={`memo-block-inner ${block.flipped && 'memo-block-flipped'}`}>
@@ -11,7 +13,6 @@ export const Block = ({block, animating, handleBlockClick}) => {
                     <img className="imagen" src={block.imagen} alt="someting"/>
                 </div>
             </div>
-            
         </div>
     )
 }
