@@ -1,15 +1,21 @@
 .board {
+    grid-column-start: 2;
+    grid-column-end: 11;
+    grid-row-start: 2 ;
+    grid-row-end: 5 ;
+    width: 80%;
+    height: auto;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 10px;
-    max-width: 600px;
-    margin: 100px auto;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 20px;
 }
 
-@media (max-width: 600px) {
-    .board{
-        grid-template-columns: repeat(4, 1fr);
-        max-width: 450px;
-        grid-gap: 3px;
-    }   
+@media (max-width: 800px) {
+    .board {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 10px;
+}
 }

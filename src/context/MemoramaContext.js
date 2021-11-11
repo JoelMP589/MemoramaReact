@@ -3,7 +3,37 @@ import { createContext, useState } from 'react'
 export const MemoramaContext = createContext();
 
 export const MemoramaProvider = ({ children }) => {
-    const [imagenList, setImagenList] = useState(["https://img.icons8.com/color/48/000000/treatment-plan.png", "https://img.icons8.com/office/40/000000/tooth.png", "https://img.icons8.com/clouds/100/000000/stethoscope.png", "https://img.icons8.com/ios/50/000000/medical-doctor.png", "https://img.icons8.com/doodle/48/000000/pills.png", "https://img.icons8.com/bubbles/50/000000/lungs.png", "https://img.icons8.com/ios-filled/50/000000/xray.png", "https://img.icons8.com/fluency/48/000000/brain.png"]);
+    const [imagenList, setImagenList] = useState(
+        ["assets/36.png",
+            "assets/28.png",
+            "assets/31.png",
+            "assets/26.png",
+            "assets/33.png",
+            "assets/25.png",
+            "assets/24.png",
+            "assets/29.png",
+            "assets/35.png",
+            "assets/34.png",
+            "assets/30.png",
+            "assets/29.png",
+            "assets/32.png",
+            "assets/23.png",
+            "assets/34.png",
+            "assets/31.png",
+            "assets/36.png",
+            "assets/33.png",
+            "assets/25.png",
+            "assets/27.png",
+            "assets/23.png",
+            "assets/28.png",
+            "assets/24.png",
+            "assets/26.png",
+            "assets/35.png",
+            "assets/32.png",
+            "assets/30.png",
+            "assets/31.png",
+            "assets/27.png",
+        ]);
 
     const [randomBlocks, setRandomBlocks] = useState([]);
     const [selectBlock, setSelectBlock] = useState(null);
@@ -12,21 +42,21 @@ export const MemoramaProvider = ({ children }) => {
     const [animating, setAnimating] = useState(false);
     const [selectBlockAdicional, setSelectBlockAdicional] = useState(null);
     const [bandera, setBandera] = useState(false);
-    const [piezas, setPiezas] = useState(0)
+
 
     const obtenerTablero = () => {
-        const randomImagenList = revolverArray([...imagenList, ...imagenList, ...imagenList])
-        setRandomBlocks(randomImagenList.map((imagen, i) => ({ index: i, imagen, flipped: false })))
-        setPiezas(0);
+        /* const randomImagenList = [...imagenList, ...imagenList, ...imagenList] */
+        setRandomBlocks(imagenList.map((imagen, i) => ({ index: i, imagen, flipped: false })))
+
     }
 
-    const revolverArray = a => {
+    /* const revolverArray = a => {
         for (let i = a.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [a[i], a[j]] = [a[j], a[i]];
         }
         return a;
-    }
+    } */
 
     const handleBlockClick = block => {
         const flippedBlock = { ...block, flipped: true }
@@ -40,7 +70,7 @@ export const MemoramaProvider = ({ children }) => {
             setBandera(true);
         } else if (bandera) {
             if (selectBlockAdicional.imagen === block.imagen && selectBlock.imagen === block.imagen) {
-                setPiezas(prev => prev + 1);
+
                 setSelectBlockAdicional(null);
                 setSelectBlock(null);
                 setBandera(false);
@@ -88,7 +118,7 @@ export const MemoramaProvider = ({ children }) => {
             animating,
             timerKey,
             date,
-            piezas,
+
             setDate,
             timer,
             setTimerKey,

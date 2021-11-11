@@ -9,7 +9,7 @@
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 .memo-block-inner{
@@ -26,7 +26,6 @@
 }
 
 .memo-block-back{
-    background-color: salmon;
     transform: rotateY(180deg);
     box-shadow: 5px, 5px, 10px, 0px rgb(0, 0, 0/50%);
     display: flex;
@@ -35,17 +34,11 @@
 }
 
 .memo-block-front{
-    background-color: turquoise;
+    background-image: url("../assets/0.png");
+    background-size: cover;
 }
 
 .imagen{
-    width: 40px;
-    height: 40px;
-}
-
-@media (max-width: 600px) {
-    .imagen{
-        width: 50px;
-        height: 50px;
-    }
+    width: 100%;
+    height: auto;
 }
