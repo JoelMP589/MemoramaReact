@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import StepWizard from "react-step-wizard";
 import { Instrucciones } from './components/Instrucciones';
-import { Memorama } from './components/Memorama';
+/* import { Memorama } from './components/Memorama'; */
 import { Tablero } from './components/Tablero';
 
 export const App = () => {
