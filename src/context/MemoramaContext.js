@@ -1,8 +1,23 @@
 import { createContext, useState } from 'react'
+import firebase from 'firebase/compat/app';
+import "firebase/compat/firestore";
+
+firebase.initializeApp({
+    apiKey: "AIzaSyBPRp4xTpCcaUagaA5P_YBFsqyWc3_H-u0",
+    authDomain: "realtimetest-54cdd.firebaseapp.com",
+    projectId: "realtimetest-54cdd",
+    storageBucket: "realtimetest-54cdd.appspot.com",
+    messagingSenderId: "740465626710",
+    appId: "1:740465626710:web:0a69deffa710515d4b35f7",
+    measurementId: "G-L0KYEFY7F8"
+})
+
+const firestore = firebase.firestore();
 
 export const MemoramaContext = createContext();
 
 export const MemoramaProvider = ({ children }) => {
+    const memoramaRef = firestore.collection("Memorama");
     const [imagenList, setImagenList] = useState(
         [["assets/36.png", "assets/28.png", "assets/31.png", "assets/26.png", "assets/33.png", "assets/25.png", "assets/24.png", "assets/29.png", "assets/35.png", "assets/34.png",
             "assets/30.png", "assets/29.png", "assets/32.png", "assets/23.png", "assets/34.png", "assets/31.png", "assets/36.png", "assets/33.png", "assets/25.png",
@@ -149,13 +164,39 @@ export const MemoramaProvider = ({ children }) => {
         );
     };
 
+    const sendMessageToFirebase = async (documento) => {
+        const increment = firebase.firestore.FieldValue.increment(1);
+        await memoramaRef.doc(documento).set({
+            Total: increment
+        },
+            { merge: true });
+    }
+
+    const sendAnswersToFirebase = async (documento) => {
+        const increment = firebase.firestore.FieldValue.increment(1);
+        await memoramaRef.doc(documento).set({
+            Si: increment
+        },
+            { merge: true });
+    }
+
+    const sendNegativeAnswersToFirebase = async (documento) => {
+        const increment = firebase.firestore.FieldValue.increment(1);
+        await memoramaRef.doc(documento).set({
+            No: increment
+        },
+            { merge: true });
+    }
+
     return (
         <MemoramaContext.Provider value={{
             randomBlocks,
             animating,
             timerKey,
             date,
-
+            sendMessageToFirebase,
+            sendAnswersToFirebase,
+            sendNegativeAnswersToFirebase,
             setDate,
             timer,
             setTimerKey,
