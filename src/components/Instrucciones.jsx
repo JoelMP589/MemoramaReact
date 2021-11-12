@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { MemoramaContext } from '../context/MemoramaContext';
 import '../css/Instrucciones.css'
 
 export const Instrucciones = (props) => {
+
+    const { setDate, setTimerKey, timerKey } = useContext(MemoramaContext);
+
+    const next = () => {
+        props.nextStep();
+        setDate(Date.now() + 16000);
+        setTimerKey(timerKey + 1);
+    }
+
     return (
         <div className="contenedor">
             <img className="fondo-imagen" src={'/assets/Fondo_encuesta.png'} alt="fondo" />
             <div className="contenedor-imagen">
                 <img src='assets/Modal_inicio.png' alt="instrucciones" className="Modal-imagen" />
-                <img onClick={props.nextStep} src='/assets/boton_comenzar.png' alt="Comenzar" className="Modal-boton" />
+                <img onClick={() => next()} src='/assets/boton_comenzar.png' alt="Comenzar" className="Modal-boton" />
             </div>
         </div>
     )

@@ -35,7 +35,13 @@
 .tiempo{
     font-size: 2em;
     font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 10px #000;
+    color: rgb(0, 3, 202);
+    text-shadow: 0 0 3px #000;
     z-index: 2;
+}
+
+@media (max-width: 830px) {
+    .tiempo{
+        font-size: 1em;
+    }
 }

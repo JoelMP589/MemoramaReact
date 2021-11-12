@@ -45,10 +45,13 @@ export const MemoramaProvider = ({ children }) => {
             "assets/26.png", "assets/3.png",]
         ]);
 
+    const [respuestas] = useState(["assets/31.png", "assets/20.png", "assets/16.png", "assets/11.png", "assets/.png",
+        "assets/33.png", "assets/17.png", "assets/13.png", "assets/6.png", "assets/2.png"]);
+
     const [randomBlocks, setRandomBlocks] = useState([]);
     const [selectBlock, setSelectBlock] = useState(null);
     const [timerKey, setTimerKey] = useState(0)
-    const [date, setDate] = useState(Date.now() + 15000);
+    const [date, setDate] = useState(0);
     const [animating, setAnimating] = useState(false);
     const [selectBlockAdicional, setSelectBlockAdicional] = useState(null);
     const [bandera, setBandera] = useState(false);
@@ -68,28 +71,42 @@ export const MemoramaProvider = ({ children }) => {
         return a;
     } */
 
-    const handleBlockClick = block => {
+    const handleBlockClick = (block, nivel) => {
         const flippedBlock = { ...block, flipped: true }
         let randomBlocksCopy = [...randomBlocks];
         randomBlocksCopy.splice(block.index, 1, flippedBlock);
         setRandomBlocks(randomBlocksCopy);
-        if (selectBlock === null && bandera === false) {
-            setSelectBlock(block);
-        } else if (selectBlock.imagen === block.imagen && bandera === false) {
-            setSelectBlockAdicional(block);
-            setBandera(true);
-        } else if (bandera) {
-            if (selectBlockAdicional.imagen === block.imagen && selectBlock.imagen === block.imagen) {
-
-                setSelectBlockAdicional(null);
-                setSelectBlock(null);
-                setBandera(false);
-            } else {
+        if (block.imagen === respuestas[nivel]) {
+            console.log("entro a tres");
+            if (selectBlock === null && bandera === false) {
+                setSelectBlock(block);
+            } else if (selectBlock.imagen === block.imagen && bandera === false) {
+                setSelectBlockAdicional(block);
+                setBandera(true);
+            } else if (bandera) {
+                if (selectBlockAdicional.imagen === block.imagen && selectBlock.imagen === block.imagen) {
+                    setSelectBlockAdicional(null);
+                    setSelectBlock(null);
+                    setBandera(false);
+                } else {
+                    setAnimating(true);
+                    setTimeout(() => {
+                        randomBlocksCopy.splice(block.index, 1, block);
+                        randomBlocksCopy.splice(selectBlock.index, 1, selectBlock);
+                        randomBlocksCopy.splice(selectBlockAdicional.index, 1, selectBlockAdicional);
+                        setRandomBlocks(randomBlocksCopy);
+                        setSelectBlock(null);
+                        setSelectBlockAdicional(null);
+                        setBandera(false);
+                        setAnimating(false)
+                    }, 500);
+                }
+            }
+            else {
                 setAnimating(true);
                 setTimeout(() => {
                     randomBlocksCopy.splice(block.index, 1, block);
                     randomBlocksCopy.splice(selectBlock.index, 1, selectBlock);
-                    randomBlocksCopy.splice(selectBlockAdicional.index, 1, selectBlockAdicional);
                     setRandomBlocks(randomBlocksCopy);
                     setSelectBlock(null);
                     setSelectBlockAdicional(null);
@@ -97,28 +114,38 @@ export const MemoramaProvider = ({ children }) => {
                     setAnimating(false)
                 }, 500);
             }
-        }
-        else {
-            setAnimating(true);
-            setTimeout(() => {
-                randomBlocksCopy.splice(block.index, 1, block);
-                randomBlocksCopy.splice(selectBlock.index, 1, selectBlock);
-                setRandomBlocks(randomBlocksCopy);
+        } else {
+            console.log("entro a solo dos");
+            if (selectBlock === null) {
+                setSelectBlock(block);
+            } else if (selectBlock.imagen === block.imagen) {
                 setSelectBlock(null);
-                setSelectBlockAdicional(null);
-                setBandera(false);
-                setAnimating(false)
-            }, 500);
+
+            } else {
+                setAnimating(true);
+                setTimeout(() => {
+                    if (selectBlockAdicional) {
+                        randomBlocksCopy.splice(selectBlockAdicional.index, 1, selectBlockAdicional);
+                        setSelectBlockAdicional(null);
+                        setBandera(false);
+                    }
+                    randomBlocksCopy.splice(block.index, 1, block);
+                    randomBlocksCopy.splice(selectBlock.index, 1, selectBlock)
+                    setRandomBlocks(randomBlocksCopy);
+                    setSelectBlock(null);
+                    setAnimating(false)
+                }, 500);
+            }
         }
     }
 
-    const timer = ({ total }) => {
+    const timer = ({ seconds }) => {
         return (
-            <div>
-                <span>
-                    {total} </span>
-            </div>
-
+            <>
+                <p className="tiempo">
+                    {seconds} </p>
+                <img className="tiempo-Img" src={seconds > 10 ? `/assets/verde.png` : seconds > 5 ? `/assets/amarillo.png` : `/assets/rojo.png`} alt="tiempo" />
+            </>
         );
     };
 
