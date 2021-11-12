@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import StepWizard from "react-step-wizard";
+import { Cierre } from './components/Cierre';
 import { Instrucciones } from './components/Instrucciones';
+import { Perdedor } from './components/Perdedor';
+import { Pregunta } from './components/Pregunta';
 /* import { Memorama } from './components/Memorama'; */
 import { Tablero } from './components/Tablero';
 
@@ -25,7 +28,20 @@ export const App = () => {
       <>
         <StepWizard isLazyMount={true}>
           <Instrucciones />
-          <Tablero />
+          <Tablero nivel={0} />
+          <Tablero nivel={1} />
+          <Tablero nivel={2} />
+          <Tablero nivel={3} />
+          <Tablero nivel={4} />
+          <Tablero nivel={5} />
+          <Tablero nivel={6} />
+          <Tablero nivel={7} />
+          <Tablero nivel={8} />
+          <Tablero nivel={9} />
+          <Perdedor />
+          <Pregunta num={1} />
+          <Pregunta num={2} />
+          <Cierre />
         </StepWizard>
       </>
     );

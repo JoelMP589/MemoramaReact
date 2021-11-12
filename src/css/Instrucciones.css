@@ -46,17 +46,23 @@
     z-index: 1;
 }
 
+.Modal-boton-derecha{
+    top:340px;
+    left: 650px;
+}
+
 .Modal-botones{
     position: relative;
     top:0px;
+    width: 120px;
 }
 
 
 .Modal-contenedor-botones{
-    width: 80%;
+    width: 30%;
     display: flex;
     justify-content: space-between;
-    top:320px;
+    top:160px;
     position: absolute;
 }
 
@@ -69,12 +75,17 @@
         width: 200px;
         top:290px
     }
+
+    .Modal-boton-derecha{
+    left: 600px;
+}
     .Modal-botones{
     position: relative;
     top:0px;
+    width: 100px;
 }
     .Modal-contenedor-botones{
-        top:290px
+        top:140px
     }
 }
 
@@ -87,12 +98,18 @@
         width: 190px;
         top:260px
     }
+
+    .Modal-boton-derecha{
+        top:300px;
+    left: 550px;
+}
     .Modal-botones{
     position: relative;
     top:0px;
+    width: 95px;
 }
     .Modal-contenedor-botones{
-        top:260px
+        top:130px
     }
 }
 
@@ -105,12 +122,17 @@
         width: 160px;
         top:210px
     }
+    .Modal-boton-derecha{
+        top:280px;
+    left: 500px;
+}
     .Modal-botones{
     position: relative;
     top:0px;
+    width: 90px;
 }
     .Modal-contenedor-botones{
-        top:210px
+        top:120px
     }
 }
 @media (max-width: 750px) {
@@ -122,12 +144,17 @@
         width: 160px;
         top:170px
     }
+    .Modal-boton-derecha{
+        top:210px;
+    left: 400px;
+}
     .Modal-botones{
     position: relative;
     top:0px;
+    width: 70px;
 }
     .Modal-contenedor-botones{
-        top:170px
+        top:100px
     }
 }
 
@@ -140,11 +167,16 @@
         width: 120px;
         top:150px
     }
+    .Modal-boton-derecha{
+        top:180px;
+    left: 330px;
+}
     .Modal-botones{
     position: relative;
     top:0px;
+    width: 60px;
 }
     .Modal-contenedor-botones{
-        top:150px
+        top:80px
     }
 }
