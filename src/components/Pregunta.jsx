@@ -1,8 +1,10 @@
 import React, { useContext } from 'react'
 import { MemoramaContext } from '../context/MemoramaContext';
 
+
 export const Pregunta = (props) => {
     const { sendAnswersToFirebase, sendNegativeAnswersToFirebase } = useContext(MemoramaContext);
+
     return (
         <div className="contenedor">
             <img className="fondo-imagen" src={'/assets/Fondo_encuesta.png'} alt="fondo" />

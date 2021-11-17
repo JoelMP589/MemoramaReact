@@ -1,6 +1,9 @@
 import { createContext, useState } from 'react'
 import firebase from 'firebase/compat/app';
 import "firebase/compat/firestore";
+import useSound from 'use-sound';
+import error from '../assets/error.mp3';
+import success from '../assets/acierto.mp3';
 
 firebase.initializeApp({
     apiKey: "AIzaSyBPRp4xTpCcaUagaA5P_YBFsqyWc3_H-u0",
@@ -17,6 +20,8 @@ const firestore = firebase.firestore();
 export const MemoramaContext = createContext();
 
 export const MemoramaProvider = ({ children }) => {
+    const [playLost] = useSound(error);
+    const [playWin] = useSound(success);
     const memoramaRef = firestore.collection("Memorama");
     const [imagenList, setImagenList] = useState(
         [["assets/36.png", "assets/28.png", "assets/31.png", "assets/26.png", "assets/33.png", "assets/25.png", "assets/24.png", "assets/29.png", "assets/35.png", "assets/34.png",
@@ -92,7 +97,6 @@ export const MemoramaProvider = ({ children }) => {
         randomBlocksCopy.splice(block.index, 1, flippedBlock);
         setRandomBlocks(randomBlocksCopy);
         if (block.imagen === respuestas[nivel]) {
-            console.log("entro a tres");
             if (selectBlock === null && bandera === false) {
                 setSelectBlock(block);
             } else if (selectBlock.imagen === block.imagen && bandera === false) {
@@ -103,6 +107,7 @@ export const MemoramaProvider = ({ children }) => {
                     setSelectBlockAdicional(null);
                     setSelectBlock(null);
                     setBandera(false);
+                    playWin();
                 } else {
                     setAnimating(true);
                     setTimeout(() => {
@@ -127,15 +132,15 @@ export const MemoramaProvider = ({ children }) => {
                     setSelectBlockAdicional(null);
                     setBandera(false);
                     setAnimating(false)
+                    playLost();
                 }, 500);
             }
         } else {
-            console.log("entro a solo dos");
             if (selectBlock === null) {
                 setSelectBlock(block);
             } else if (selectBlock.imagen === block.imagen) {
                 setSelectBlock(null);
-
+                playWin();
             } else {
                 setAnimating(true);
                 setTimeout(() => {
@@ -149,6 +154,7 @@ export const MemoramaProvider = ({ children }) => {
                     setRandomBlocks(randomBlocksCopy);
                     setSelectBlock(null);
                     setAnimating(false)
+                    playLost();
                 }, 500);
             }
         }
@@ -159,7 +165,7 @@ export const MemoramaProvider = ({ children }) => {
             <>
                 <p className="tiempo">
                     {seconds} </p>
-                <img className="tiempo-Img" src={seconds > 10 ? `/assets/verde.png` : seconds > 5 ? `/assets/amarillo.png` : `/assets/rojo.png`} alt="tiempo" />
+                <img className="tiempo-Img" src={seconds > 10 ? `/assets/verde.png` : seconds > 6 ? `/assets/amarillo.png` : `/assets/rojo.png`} alt="tiempo" />
             </>
         );
     };
