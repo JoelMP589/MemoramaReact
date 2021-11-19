@@ -4,7 +4,7 @@ import '../css/Instrucciones.css'
 
 export const Instrucciones = (props) => {
 
-    const { setDate, setTimerKey, timerKey, sendMessageToFirebase } = useContext(MemoramaContext);
+    const { setDate, setTimerKey, timerKey } = useContext(MemoramaContext);
 
     const next = () => {
         props.nextStep();

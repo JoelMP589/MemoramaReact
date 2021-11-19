@@ -23,10 +23,17 @@ export const App = () => {
     isLandscape();
   }, []);
 
+  let noTransitions = {
+    enterRight: '',
+    enterLeft: '',
+    exitRight: '',
+    exitLeft: ''
+  };
+
   if (screenIsOnLandscape) {
     return (
       <>
-        <StepWizard isLazyMount={true}>
+        <StepWizard isLazyMount={true} transitions={noTransitions}>
           <Instrucciones />
           <Tablero nivel={0} />
           <Tablero nivel={1} />
