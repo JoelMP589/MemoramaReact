@@ -10,7 +10,6 @@ export const Instrucciones = (props) => {
         props.nextStep();
         setDate(Date.now() + 16000);
         setTimerKey(timerKey + 1);
-        sendMessageToFirebase("Jugadores");
     }
 
     return (
