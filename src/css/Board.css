@@ -1,11 +1,24 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
 .board {
-    grid-column-start: 2;
+    -ms-grid-column: 2;
+        grid-column-start: 2;
+    -ms-grid-column-span: 9;
     grid-column-end: 11;
-    grid-row-start: 3 ;
+    -ms-grid-row: 3 ;
+        grid-row-start: 3 ;
+    -ms-grid-row-span: 2;
     grid-row-end: 5 ;
     width: 80%;
     height: auto;
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 20px 1fr 20px 1fr 20px 1fr 20px 1fr 20px 1fr 20px 1fr 20px 1fr 20px 1fr;
     grid-template-columns: repeat(9, 1fr);
     grid-gap: 20px;
 }
@@ -14,7 +27,9 @@
     .board {
     width: 100%;
     height: auto;
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr;
     grid-template-columns: repeat(9, 1fr);
     grid-gap: 10px;
 }

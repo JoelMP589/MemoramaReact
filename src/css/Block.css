@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
 .memo-block{
     cursor: pointer;
     aspect-ratio: 1/1;
@@ -17,20 +24,34 @@
     width: 100%;
     height: 100%;
     text-align: center;
+    -webkit-transition: -webkit-transform 0.6s;
+    transition: -webkit-transform 0.6s;
+    -o-transition: transform 0.6s;
     transition: transform 0.6s;
-    transform-style: preserve-3d;
+    transition: transform 0.6s, -webkit-transform 0.6s;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
 }
 
 .memo-block-flipped{
-    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
 }
 
 .memo-block-back{
-    transform: rotateY(180deg);
-    box-shadow: 5px, 5px, 10px, 0px rgb(0, 0, 0/50%);
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+    -webkit-box-shadow: 5px, 5px, 10px, 0px rgb(0, 0, 0/50%);
+            box-shadow: 5px, 5px, 10px, 0px rgb(0, 0, 0/50%);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .memo-block-front{

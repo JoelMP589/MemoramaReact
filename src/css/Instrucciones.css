@@ -1,12 +1,65 @@
 .contenedor {
+    display: -ms-grid;
     display: grid;
     width: 100%;
     height: 100vh;
     grid-gap: 10px;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     justify-items: center;
+    -ms-grid-columns:1fr 10px 1fr 10px 1fr 10px 1fr;
     grid-template-columns:repeat(4, 1fr);
+    -ms-grid-rows: 1fr 10px 1fr 10px 1fr 10px 1fr;
     grid-template-rows: repeat(4, 1fr);
+}.contenedor > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+}.contenedor > *:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+}.contenedor > *:nth-child(3) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 5;
+}.contenedor > *:nth-child(4) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 7;
+}.contenedor > *:nth-child(5) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+}.contenedor > *:nth-child(6) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+}.contenedor > *:nth-child(7) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 5;
+}.contenedor > *:nth-child(8) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 7;
+}.contenedor > *:nth-child(9) {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+}.contenedor > *:nth-child(10) {
+    -ms-grid-row: 5;
+    -ms-grid-column: 3;
+}.contenedor > *:nth-child(11) {
+    -ms-grid-row: 5;
+    -ms-grid-column: 5;
+}.contenedor > *:nth-child(12) {
+    -ms-grid-row: 5;
+    -ms-grid-column: 7;
+}.contenedor > *:nth-child(13) {
+    -ms-grid-row: 7;
+    -ms-grid-column: 1;
+}.contenedor > *:nth-child(14) {
+    -ms-grid-row: 7;
+    -ms-grid-column: 3;
+}.contenedor > *:nth-child(15) {
+    -ms-grid-row: 7;
+    -ms-grid-column: 5;
+}.contenedor > *:nth-child(16) {
+    -ms-grid-row: 7;
+    -ms-grid-column: 7;
 }
 
 .fondo-imagen{
@@ -21,12 +74,22 @@
 
 .contenedor-imagen{
     position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    grid-column-start: 1;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-grid-column: 1;
+        grid-column-start: 1;
+    -ms-grid-column-span: 4;
     grid-column-end: 5;
-    grid-row-start: 1;
+    -ms-grid-row: 1;
+        grid-row-start: 1;
+    -ms-grid-row-span: 4;
     grid-row-end: 5;
 }
 
@@ -60,8 +123,12 @@
 
 .Modal-contenedor-botones{
     width: 30%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     top:160px;
     position: absolute;
 }
