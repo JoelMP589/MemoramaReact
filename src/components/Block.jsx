@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import { MemoramaContext } from '../context/MemoramaContext'
 import '../css/Block.css'
 
-export const Block = ({ block, nivel }) => {
+export const Block = memo(({ block, nivel }) => {
     const { animating, handleBlockClick } = useContext(MemoramaContext)
     return (
         <div className="memo-block" onClick={() => (!block.flipped && !animating) && handleBlockClick(block, nivel)}>
@@ -15,4 +15,4 @@ export const Block = ({ block, nivel }) => {
             </div>
         </div>
     )
-}
+})

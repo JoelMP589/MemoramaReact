@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, memo } from 'react'
 import { MemoramaContext } from '../context/MemoramaContext'
 import '../css/Tablero.css'
 import { Board } from './Board'
@@ -8,10 +8,11 @@ import error from '../assets/lostSound.mp3';
 import clock from '../assets/tickingClock.mp3';
 
 
-export const Tablero = (props) => {
+export const Tablero = memo((props) => {
     const { obtenerTablero, timerKey, timer, date, setDate, setTimerKey } = useContext(MemoramaContext)
     const [playLost] = useSound(error);
     const [playClock] = useSound(clock);
+
     useEffect(() => {
         obtenerTablero(props.nivel);
         // eslint-disable-next-line
@@ -45,4 +46,4 @@ export const Tablero = (props) => {
             <Board nivel={props.nivel} />
         </div>
     )
-}
+})

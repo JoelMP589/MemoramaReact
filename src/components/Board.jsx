@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import { Block } from './Block'
 import '../css/Board.css'
 import { MemoramaContext } from '../context/MemoramaContext';
 
 
-export const Board = (props) => {
+export const Board = memo((props) => {
     const { randomBlocks } = useContext(MemoramaContext);
     return (
         <main className="board">
@@ -15,4 +15,4 @@ export const Board = (props) => {
             }
         </main>
     )
-}
+})
