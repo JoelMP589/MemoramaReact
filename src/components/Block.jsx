@@ -8,6 +8,7 @@ export const Block = memo(({ block, nivel }) => {
         <div className="memo-block" onClick={() => (!block.flipped && !animating) && handleBlockClick(block, nivel)}>
             <div className={`memo-block-inner ${block.flipped && 'memo-block-flipped'}`}>
                 <div className="memo-block-front">
+                    <img className="imagen" src='/assets/0.png' alt="someting" />
                 </div>
                 <div className="memo-block-back">
                     <img className="imagen" src={block.imagen} alt="someting" />
