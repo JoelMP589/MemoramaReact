@@ -7,7 +7,8 @@
 
 .memo-block{
     cursor: pointer;
-    aspect-ratio: 1/1;
+    height: 80px;
+    width: 80px;
 }
 
 .memo-block-front, .memo-block-back{
@@ -71,4 +72,25 @@
 .imagen{
     width: 100%;
     height: auto;
+}
+
+@media (max-height:600px) {
+    .memo-block{
+        width: 65px;
+        height: 65px;
+    }
+}
+@media (max-width:990px) {
+    .memo-block{
+        width: 55px;
+        height: 55px;
+    }
+}
+
+
+@media (max-width:800px) {
+    .memo-block{
+        width: 40px;
+        height: 40px;
+    }
 }
