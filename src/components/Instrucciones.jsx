@@ -8,7 +8,7 @@ export const Instrucciones = (props) => {
 
     const next = () => {
         props.nextStep();
-        setDate(Date.now() + 1600000000000000000000000000000000000000000000000000000000000000000000);
+        setDate(Date.now() + 16000);
         setTimerKey(timerKey + 1);
     }
 
